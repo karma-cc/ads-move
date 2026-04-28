@@ -8,32 +8,7 @@
 ^https://api-cn\.hellotalk8\.com/config-center/v2/platform/banner\?position=non-vip-drawer url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/main/hellotalk_ads.js
 
 
-# Hellotalk - VIP 图标 / VIP 体验提示
-^https:\/\/api-cn\.hellotalk8\.com\/payment_gateway_v2\/user\/vip_info url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
-^https:\/\/api-cn\.hellotalk8\.com\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
 
-# Hellotalk - 本次抓到的可见 banner 广告
-^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v2\/platform\/banner\?position=non-vip-drawer url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
-^https:\/\/api-cn\.hellotalk8\.com\/education\/student\/course\/chat_list_banner url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
-
-# Hellotalk - 本次抓到的穿山甲广告 SDK 统计
-^https:\/\/api-access\.pangolin-sdk-toutiao1\.com\/api\/ad\/union\/sdk\/stats\/batch\/ url reject-200
-
-# Hellotalk - 本次抓到的广告/归因统计
-^https:\/\/da\.mosspf\.cn\/v1\/open\/da url reject-200
-
-# VIP 状态
-^https:\/\/api-cn\.hellotalk8\.com\/payment_gateway_v2\/user\/vip_info url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
-
-# VIP 体验卡提示
-^https:\/\/api-cn\.hellotalk8\.com\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
-
-# VIP 页面内容 / 商品 / banner
-^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page(?:\?|$) url reject-dict
-^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page_content(?:\?|$) url reject-dict
-^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_product(?:\?|$) url reject-dict
-^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_banner_v1(?:\?|$) url reject-dict
-^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v1\/vip_page_banner url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
 
 [mitm]
 hostname = *.hellotalk8.com, *.appsflyersdk.com, *.mosspf.cn, *.fe-resource-app.xiaohongshu.com, *.pangolin-sdk-toutiao1.com, *.dun.163.com,*.beizi.biz, *.doubleclick-cn.net, *.smaato.net, *.somamobi.com, *.hookspf.com, *.volces.com, *.zijieapi.com
