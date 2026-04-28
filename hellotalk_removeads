@@ -8,4 +8,4 @@
 ^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v2\/platform\/banner\?position=non-vip-drawer url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/main/hellotalk_ads.js
 
 [mitm]
-hostname = *.hellotalk8.com,*.appsflyersdk.com,*.mosspf.cn,*.fe-resource-app.xiaohongshu.com,*.pangolin-sdk-toutiao1.com,*.dun.163.com,*.beizi.biz,*.doubleclick-cn.net,*.smaato.net,*.somamobi.com,*.hookspf.com,*.volces.com,*.zijieapi.com
+hostname = *.hellotalk8.com, *.appsflyersdk.com, *.mosspf.cn, *.fe-resource-app.xiaohongshu.com, *.pangolin-sdk-toutiao1.com, *.dun.163.com,*.beizi.biz, *.doubleclick-cn.net, *.smaato.net, *.somamobi.com, *.hookspf.com, *.volces.com, *.zijieapi.com
