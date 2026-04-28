@@ -1,0 +1,74 @@
+/*
+Hellotalk - 本次 VIP 图标 / 可见广告清理
+适用：
+- payment_gateway_v2/user/vip_info
+- member_privilege_center/v3/vip_experience_card/query_user_feature_right
+- config-center/v2/platform/banner?position=non-vip-drawer
+- education/student/course/chat_list_banner
+*/
+
+let body = $response.body || "";
+
+try {
+  let obj = JSON.parse(body);
+  const url = $request.url;
+
+  // 1. VIP 信息接口：保持“非 VIP”状态，避免 VIP 图标 / VIP 标识展示
+  if (/\/payment_gateway_v2\/user\/vip_info/.test(url)) {
+    if (obj.data) {
+      obj.data.vip_year = 0;
+      obj.data.vip_stat = 1;
+      obj.data.multi_lang_count = 1;
+      obj.data.product_code = 0;
+      obj.data.vip_expire = 0;
+      obj.data.vip_type = 0;
+      obj.data.vip_renew_type = 0;
+      obj.data.last_vip_type = 0;
+
+      obj.data.vip_plus_product_code = 0;
+      obj.data.vip_plus_expire = 0;
+      obj.data.vip_plus_type = 0;
+      obj.data.vip_plus_renew_type = 0;
+
+      obj.data.current_vip_level = "Normal";
+      obj.data.current_vip_renewals_status = "Normal";
+    }
+  }
+
+  // 2. VIP 体验卡 / 特权试用提示：全部清零，避免触发 VIP 入口、红点、图标提示
+  if (/\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right/.test(url)) {
+    obj.code = 0;
+    obj.status = 0;
+    obj.msg = "ok";
+    obj.data = {
+      effect_status: 0,
+      left_times: 0,
+      expire_at: 0,
+      time_now: 0
+    };
+  }
+
+  // 3. 非 VIP 抽屉 banner：清空广告列表
+  if (/\/config-center\/v2\/platform\/banner/.test(url)) {
+    obj.code = 0;
+    obj.data = {
+      ad_list: []
+    };
+  }
+
+  // 4. 聊天列表课程 banner：强制不展示
+  if (/\/education\/student\/course\/chat_list_banner/.test(url)) {
+    obj.status = 0;
+    obj.msg = "success";
+    obj.data = {
+      show: false,
+      banner: null
+    };
+  }
+
+  body = JSON.stringify(obj);
+} catch (e) {
+  // 非 JSON / 加密二进制响应不处理，避免误伤
+}
+
+$done({ body });
