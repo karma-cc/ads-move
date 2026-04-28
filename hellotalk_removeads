@@ -32,7 +32,17 @@
 ^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page_content(?:\?|$) url reject-dict
 ^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_product(?:\?|$) url reject-dict
 ^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_banner_v1(?:\?|$) url reject-dict
+# Hellotalk - 继续尝试隐藏固定 VIP 图标：顶部菜单 / 初始化配置
+^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v1\/top_menu url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
+^https:\/\/api-cn\.hellotalk8\.com\/user_register_center\/v3\/launch_config url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
 
+# Hellotalk - VIP 页面相关残留，继续拦
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page_content(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_product(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_banner_v1(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v1\/vip_page_banner url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
+^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v1\/vip_promotion_page url reject-dict
 
 [mitm]
 hostname = *.hellotalk8.com, *.appsflyersdk.com, *.mosspf.cn, *.fe-resource-app.xiaohongshu.com, *.pangolin-sdk-toutiao1.com, *.dun.163.com,*.beizi.biz, *.doubleclick-cn.net, *.smaato.net, *.somamobi.com, *.hookspf.com, *.volces.com, *.zijieapi.com
