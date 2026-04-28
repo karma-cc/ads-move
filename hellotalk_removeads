@@ -21,5 +21,18 @@
 
 # Hellotalk - 本次抓到的广告/归因统计
 ^https:\/\/da\.mosspf\.cn\/v1\/open\/da url reject-200
+
+# Hellotalk - 二次进入 VIP 页后残留：活动状态 / VIP banner
+^https:\/\/api-cn\.hellotalk8\.com\/pay_center_gateway\/v1\/query_user_activity_status url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
+^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v1\/vip_page_banner url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/hellotalkvip_js
+
+# Hellotalk - 二次进入 VIP 页后残留：VIP 页面主体 / 商品 / 顶部 banner
+# 这几个是 ht/binary 或 304 缓存场景，script-response-body 不稳，直接 reject-dict 更干净
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page_content(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_product(?:\?|$) url reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_banner_v1(?:\?|$) url reject-dict
+
+
 [mitm]
 hostname = *.hellotalk8.com, *.appsflyersdk.com, *.mosspf.cn, *.fe-resource-app.xiaohongshu.com, *.pangolin-sdk-toutiao1.com, *.dun.163.com,*.beizi.biz, *.doubleclick-cn.net, *.smaato.net, *.somamobi.com, *.hookspf.com, *.volces.com, *.zijieapi.com
