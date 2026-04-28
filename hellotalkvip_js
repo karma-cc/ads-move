@@ -1,61 +1,23 @@
-/*
-HelloTalk - VIP 图标 / VIP 页面 / VIP 权益入口清理
-适配本次新增抓包：
-- payment_gateway_v2/user/vip_info
-- member_privilege_center/v3/vip_experience_card/query_user_feature_right
-- config-center/v2/platform/banner
-- education/student/course/chat_list_banner
-- pay_center_gateway/v1/query_user_activity_status
-- config-center/v1/vip_page_banner
-- 返回体里包含 vip-privileges/multiplelang 的 JSON
-*/
-
 let url = $request.url;
 let body = $response.body || "";
 
-function walkClean(obj) {
+function cleanVipDeep(obj) {
   if (!obj || typeof obj !== "object") return obj;
 
   if (Array.isArray(obj)) {
     return obj
-      .map(walkClean)
+      .map(cleanVipDeep)
       .filter(item => {
         if (!item || typeof item !== "object") return true;
-
         let s = JSON.stringify(item);
-        if (/vip-privileges|vip_page|vip_product|vip_banner|VIP|会员|特权|权益/i.test(s)) {
-          return false;
-        }
-
-        return true;
+        return !/vip|member|privilege|会员|特权|权益/i.test(s);
       });
   }
 
   for (let k of Object.keys(obj)) {
     let lower = k.toLowerCase();
 
-    if (
-      lower === "vip" ||
-      lower === "is_vip" ||
-      lower === "isvip" ||
-      lower === "vip_icon" ||
-      lower === "vipicon" ||
-      lower === "vip_status" ||
-      lower === "vipstatus" ||
-      lower === "vip_type" ||
-      lower === "viptype" ||
-      lower === "vip_level" ||
-      lower === "viplevel"
-    ) {
-      obj[k] = 0;
-      continue;
-    }
-
-    if (
-      lower.includes("vip") ||
-      lower.includes("member") ||
-      lower.includes("privilege")
-    ) {
+    if (/vip|member|privilege/.test(lower)) {
       if (typeof obj[k] === "boolean") obj[k] = false;
       else if (typeof obj[k] === "number") obj[k] = 0;
       else if (typeof obj[k] === "string") obj[k] = "";
@@ -64,7 +26,12 @@ function walkClean(obj) {
       continue;
     }
 
-    obj[k] = walkClean(obj[k]);
+    if (typeof obj[k] === "string" && /vip|member|privilege|会员|特权|权益/i.test(obj[k])) {
+      obj[k] = "";
+      continue;
+    }
+
+    obj[k] = cleanVipDeep(obj[k]);
   }
 
   return obj;
@@ -73,7 +40,6 @@ function walkClean(obj) {
 try {
   let obj = JSON.parse(body);
 
-  // 1. VIP 信息：保持非 VIP
   if (/\/payment_gateway_v2\/user\/vip_info/.test(url)) {
     obj.status = 0;
     obj.msg = "success";
@@ -95,7 +61,6 @@ try {
     };
   }
 
-  // 2. VIP 体验卡 / 试用权益提示
   else if (/\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right/.test(url)) {
     obj.code = 0;
     obj.status = 0;
@@ -108,15 +73,11 @@ try {
     };
   }
 
-  // 3. 非 VIP 抽屉 banner
   else if (/\/config-center\/v2\/platform\/banner/.test(url)) {
     obj.code = 0;
-    obj.data = {
-      ad_list: []
-    };
+    obj.data = { ad_list: [] };
   }
 
-  // 4. 聊天列表课程 banner
   else if (/\/education\/student\/course\/chat_list_banner/.test(url)) {
     obj.status = 0;
     obj.msg = "success";
@@ -126,15 +87,6 @@ try {
     };
   }
 
-  // 5. Apple 活动 / 会员活动状态
-  else if (/\/pay_center_gateway\/v1\/query_user_activity_status/.test(url)) {
-    obj.status = 0;
-    obj.code = 0;
-    obj.msg = "success";
-    obj.data = {};
-  }
-
-  // 6. VIP 页面 banner
   else if (/\/config-center\/v1\/vip_page_banner/.test(url)) {
     obj.code = 0;
     obj.status = 404;
@@ -160,18 +112,20 @@ try {
     };
   }
 
-  // 7. 其他 JSON 中的 VIP 权益 H5 链接 / VIP 字段
-  else {
-    obj = walkClean(obj);
+  else if (
+    /\/config-center\/v1\/top_menu/.test(url) ||
+    /\/user_register_center\/v3\/launch_config/.test(url)
+  ) {
+    obj = cleanVipDeep(obj);
+  }
 
-    if (JSON.stringify(obj).includes("vip-privileges")) {
-      obj.data = Array.isArray(obj.data) ? [] : {};
-    }
+  else {
+    obj = cleanVipDeep(obj);
   }
 
   body = JSON.stringify(obj);
 } catch (e) {
-  // 非 JSON / ht-binary 内容不在 JS 内硬改，交给 reject-dict 规则处理
+  // ht/encbin、ht/binary 这种加密/二进制响应，普通 JS 改不了
 }
 
 $done({ body });
