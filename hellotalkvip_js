@@ -1,42 +1,102 @@
 /*
-Hellotalk - 本次 VIP 图标 / 可见广告清理
-适用：
+HelloTalk - VIP 图标 / VIP 页面 / VIP 权益入口清理
+适配本次新增抓包：
 - payment_gateway_v2/user/vip_info
 - member_privilege_center/v3/vip_experience_card/query_user_feature_right
-- config-center/v2/platform/banner?position=non-vip-drawer
+- config-center/v2/platform/banner
 - education/student/course/chat_list_banner
+- pay_center_gateway/v1/query_user_activity_status
+- config-center/v1/vip_page_banner
+- 返回体里包含 vip-privileges/multiplelang 的 JSON
 */
 
+let url = $request.url;
 let body = $response.body || "";
+
+function walkClean(obj) {
+  if (!obj || typeof obj !== "object") return obj;
+
+  if (Array.isArray(obj)) {
+    return obj
+      .map(walkClean)
+      .filter(item => {
+        if (!item || typeof item !== "object") return true;
+
+        let s = JSON.stringify(item);
+        if (/vip-privileges|vip_page|vip_product|vip_banner|VIP|会员|特权|权益/i.test(s)) {
+          return false;
+        }
+
+        return true;
+      });
+  }
+
+  for (let k of Object.keys(obj)) {
+    let lower = k.toLowerCase();
+
+    if (
+      lower === "vip" ||
+      lower === "is_vip" ||
+      lower === "isvip" ||
+      lower === "vip_icon" ||
+      lower === "vipicon" ||
+      lower === "vip_status" ||
+      lower === "vipstatus" ||
+      lower === "vip_type" ||
+      lower === "viptype" ||
+      lower === "vip_level" ||
+      lower === "viplevel"
+    ) {
+      obj[k] = 0;
+      continue;
+    }
+
+    if (
+      lower.includes("vip") ||
+      lower.includes("member") ||
+      lower.includes("privilege")
+    ) {
+      if (typeof obj[k] === "boolean") obj[k] = false;
+      else if (typeof obj[k] === "number") obj[k] = 0;
+      else if (typeof obj[k] === "string") obj[k] = "";
+      else if (Array.isArray(obj[k])) obj[k] = [];
+      else if (obj[k] && typeof obj[k] === "object") obj[k] = {};
+      continue;
+    }
+
+    obj[k] = walkClean(obj[k]);
+  }
+
+  return obj;
+}
 
 try {
   let obj = JSON.parse(body);
-  const url = $request.url;
 
-  // 1. VIP 信息接口：保持“非 VIP”状态，避免 VIP 图标 / VIP 标识展示
+  // 1. VIP 信息：保持非 VIP
   if (/\/payment_gateway_v2\/user\/vip_info/.test(url)) {
-    if (obj.data) {
-      obj.data.vip_year = 0;
-      obj.data.vip_stat = 1;
-      obj.data.multi_lang_count = 1;
-      obj.data.product_code = 0;
-      obj.data.vip_expire = 0;
-      obj.data.vip_type = 0;
-      obj.data.vip_renew_type = 0;
-      obj.data.last_vip_type = 0;
-
-      obj.data.vip_plus_product_code = 0;
-      obj.data.vip_plus_expire = 0;
-      obj.data.vip_plus_type = 0;
-      obj.data.vip_plus_renew_type = 0;
-
-      obj.data.current_vip_level = "Normal";
-      obj.data.current_vip_renewals_status = "Normal";
-    }
+    obj.status = 0;
+    obj.msg = "success";
+    obj.data = {
+      vip_year: 0,
+      vip_stat: 1,
+      multi_lang_count: 1,
+      product_code: 0,
+      vip_expire: 0,
+      vip_type: 0,
+      vip_renew_type: 0,
+      last_vip_type: 0,
+      vip_plus_product_code: 0,
+      vip_plus_expire: 0,
+      vip_plus_type: 0,
+      vip_plus_renew_type: 0,
+      current_vip_level: "Normal",
+      current_vip_renewals_status: "Normal"
+    };
   }
 
-  // 2. VIP 体验卡 / 特权试用提示：全部清零，避免触发 VIP 入口、红点、图标提示
-  if (/\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right/.test(url)) {
+  // 2. VIP 体验卡 / 试用权益提示
+  else if (/\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right/.test(url)) {
     obj.code = 0;
     obj.status = 0;
     obj.msg = "ok";
@@ -48,16 +108,16 @@ try {
     };
   }
 
-  // 3. 非 VIP 抽屉 banner：清空广告列表
-  if (/\/config-center\/v2\/platform\/banner/.test(url)) {
+  // 3. 非 VIP 抽屉 banner
+  else if (/\/config-center\/v2\/platform\/banner/.test(url)) {
     obj.code = 0;
     obj.data = {
       ad_list: []
     };
   }
 
-  // 4. 聊天列表课程 banner：强制不展示
-  if (/\/education\/student\/course\/chat_list_banner/.test(url)) {
+  // 4. 聊天列表课程 banner
+  else if (/\/education\/student\/course\/chat_list_banner/.test(url)) {
     obj.status = 0;
     obj.msg = "success";
     obj.data = {
@@ -66,9 +126,52 @@ try {
     };
   }
 
+  // 5. Apple 活动 / 会员活动状态
+  else if (/\/pay_center_gateway\/v1\/query_user_activity_status/.test(url)) {
+    obj.status = 0;
+    obj.code = 0;
+    obj.msg = "success";
+    obj.data = {};
+  }
+
+  // 6. VIP 页面 banner
+  else if (/\/config-center\/v1\/vip_page_banner/.test(url)) {
+    obj.code = 0;
+    obj.status = 404;
+    obj.msg = "no banner";
+    obj.md5_sum = "";
+    obj.data = {
+      id: 0,
+      vip: 0,
+      condition: 0,
+      track_name: "",
+      banner_img: "",
+      multi_banner_img: null,
+      show_type: 0,
+      label_color: "",
+      selected_bg_color: "",
+      save_text_color: "",
+      buy_button_color: "",
+      start_ts: 0,
+      end_ts: 0,
+      banner_list: null,
+      video_cover: "",
+      video_url: ""
+    };
+  }
+
+  // 7. 其他 JSON 中的 VIP 权益 H5 链接 / VIP 字段
+  else {
+    obj = walkClean(obj);
+
+    if (JSON.stringify(obj).includes("vip-privileges")) {
+      obj.data = Array.isArray(obj.data) ? [] : {};
+    }
+  }
+
   body = JSON.stringify(obj);
 } catch (e) {
-  // 非 JSON / 加密二进制响应不处理，避免误伤
+  // 非 JSON / ht-binary 内容不在 JS 内硬改，交给 reject-dict 规则处理
 }
 
 $done({ body });
