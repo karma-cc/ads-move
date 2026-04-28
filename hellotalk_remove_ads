@@ -1,4 +1,4 @@
-[rewrite_local]
+[rewrite_remote]
 # 开屏广告
 ^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/advert url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/main/hellotalk_ads.js
 ^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/ht_advert url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/main/hellotalk_ads.js
