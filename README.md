@@ -19,12 +19,12 @@
 
 | 序号 | 名称 | 文件 | Raw 链接 |
 | :--: | :-- | :-- | :-- |
-| 1 | 安兔兔去广告 | `antutu_noads.rewrite` | [点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/antutu_noads.rewrite) |
-| 2 | HelloTalk 去广告 | `hellotalk_ads.rewrite` | [点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/hellotalk_ads.rewrite) |
-| 3 | 华彩去广告 | `huacai_noads.rewrite` | [点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/huacai_noads.rewrite) |
-| 4 | 超级课程表去广告 | `superkechengbiao_noads_rewrite` | [点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/superkechengbiao_noads_rewrite) |
-| 5 | 淘票票去广告 | `taopiaopiao_noads.rewrite` | [点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/taopiaopiao_noads.rewrite) |
-| 6 | 小宇宙去广告 | `xiaoyuzhounoads.rewrite` | [点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/xiaoyuzhounoads.rewrite) |
+| 1 | 安兔兔去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/antutu_noads.rewrite) |
+| 2 | HelloTalk 去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/hellotalk_ads.rewrite) |
+| 3 | 华彩去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/huacai_noads.rewrite) |
+| 4 | 超级课程表去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/superkechengbiao_noads_rewrite) |
+| 5 | 淘票票去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/taopiaopiao_noads.rewrite) |
+| 6 | 小宇宙去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/xiaoyuzhounoads.rewrite) |
 
 ## 使用方式
 
