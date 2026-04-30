@@ -1,0 +1,10 @@
+#!name=十六番地图去酒店神券
+#!desc=去除地图左上角「5折起 酒店神券」横幅
+#!auth=karmacc
+
+
+[rewrite_local]
+^https:\/\/mp\.elong\.com\/tenthousandaura_api\/couponGift\/getUserGiftConfig(?:\?.*)?$ url reject-dict
+
+[mitm]
+hostname = mp.elong.com
