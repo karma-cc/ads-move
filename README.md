@@ -14,6 +14,7 @@
 本仓库主要用于收集和整理部分 App 的去广告重写规则。
 
 > 仅适配 Quantumult X，使用前请确认你已了解重写规则的使用方式。
+> 如遇到以下app出现了开屏广告，可以使用 QX 抓包后压缩为 zip 文件发送到 karmaccbot@gmail.com
 
 ## Rewrite 规则列表
 
