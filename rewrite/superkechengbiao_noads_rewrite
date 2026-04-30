@@ -1,0 +1,2 @@
+[rewrite_local]
+^http:\/\/182\.92\.244\.70\/d\/json\/e\/1\.1 url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/super_kechengbiao.js
