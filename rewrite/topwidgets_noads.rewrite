@@ -1,0 +1,7 @@
+hostname = api.topwidgets.com
+
+# Top Widgets+ - 首页 VIP / 广告横幅
+^https:\/\/api\.topwidgets\.com\/bff\/advertisement\/query url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/topwidgets_noads.js
+
+# Top Widgets+ - VIP 资源推广，辅助清理
+^https:\/\/api\.topwidgets\.com\/app\/resource\/vip\/list url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/topwidgets_noads.js
