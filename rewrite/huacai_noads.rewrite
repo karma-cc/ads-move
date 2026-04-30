@@ -1,0 +1,6 @@
+[rewrite_local]
+# 华夏信用卡 - 测试拦截开屏查询接口
+^https:\/\/app\.creditcard\.hxb\.com\.cn\/mgw\.htm url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/huacainoads.js
+
+[mitm]
+hostname = app.creditcard.hxb.com.cn
