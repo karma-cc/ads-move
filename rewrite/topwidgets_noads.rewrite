@@ -5,3 +5,5 @@ hostname = api.topwidgets.com
 
 # Top Widgets+ - VIP 资源推广，辅助清理
 ^https:\/\/api\.topwidgets\.com\/app\/resource\/vip\/list url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/topwidgets_noads.js
+
+^https:\/\/api\.topwidgets\.com\/app\/home\? url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/topwidgets_noads.js
