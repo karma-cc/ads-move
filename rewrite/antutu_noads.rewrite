@@ -1,0 +1,6 @@
+hostname = autovote.antutu.net, mediation-cfg.adn-plus.com.cn
+
+^http:\/\/api-htp\.beizi\.biz\/mb\/sdk0\/json url reject
+^http:\/\/sdktmp\.hubcloud\.com\.cn\/v1\/api\/sdk\/task\/list\/p url reject
+^https:\/\/autovote\.antutu\.net\/tab\/getadmanager url reject
+^https:\/\/mediation-cfg\.adn-plus\.com\.cn\/.*\.json$ url reject
