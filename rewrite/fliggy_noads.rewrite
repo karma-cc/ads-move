@@ -1,0 +1,18 @@
+[rewrite_local]
+# 飞猪开屏页面 HTML 直接清空
+^https:\/\/outfliggys\.m\.taobao\.com\/app\/trip\/rx-(?:trip-ai|poi-recommend-list)\/pages\/ url script-response-body https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/JS/fliggy_noads.js
+
+# 飞猪开屏静态素材
+^https:\/\/gw\.alicdn\.com\/imgextra\/.*\.(?:gif|png_420x280q90\.jpg|webp) url reject-200
+
+# 阿里 / 飞猪 相关统计上报
+^https?:\/\/(?:amdc|atoken)\.m\.taobao\.com\/ url reject-200
+^https:\/\/abtest\.alibaba\.com\/ url reject-200
+^https:\/\/mobilegw\.alipay\.com\/mgw\.htm url reject-200
+^https:\/\/dualstack-(?:arestapi|logs)\.amap\.com\/ url reject-200
+^https:\/\/applog\.uc\.cn\/collect url reject-200
+^https:\/\/loggw-ex\.alipay\.com\/loggw\/logUpload\.do url reject-200
+^https:\/\/h-adashx\.ut\.fliggy\.com\/upload url reject-200
+
+[mitm]
+hostname = outfliggys.m.taobao.com, gw.alicdn.com, amdc.m.taobao.com, atoken.m.taobao.com, abtest.alibaba.com, mobilegw.alipay.com, dualstack-arestapi.amap.com, dualstack-logs.amap.com, applog.uc.cn, loggw-ex.alipay.com, h-adashx.ut.fliggy.com

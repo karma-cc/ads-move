@@ -27,6 +27,7 @@
 | 5 | 淘票票去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/taopiaopiao_noads.rewrite) |
 | 6 | 小宇宙去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/xiaoyuzhounoads.rewrite) |
 | 7 | 十六番去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/shiliufan_noads.rewrite) |
+| 8 | 飞猪去广告 |[点击订阅](https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/rewrite/fliggy_noads.rewrite) |
 
 ## 使用方式
 
