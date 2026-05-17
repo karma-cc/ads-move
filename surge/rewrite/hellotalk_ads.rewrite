@@ -1,0 +1,32 @@
+[Script]
+# 开屏广告
+^https://api-cn\.hellotalk8\.com/api/login_config/business/advert script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalk_ads.js, requires-body=true, timeout=10
+^https://api-cn\.hellotalk8\.com/api/login_config/business/ht_advert script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalk_ads.js, requires-body=true, timeout=10
+^https://api-cn\.hellotalk8\.com/api/login_config/business/rewarded_advert script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalk_ads.js, requires-body=true, timeout=10
+# 首页非 VIP banner
+^https://api-cn\.hellotalk8\.com/config-center/v2/platform/banner\?position=non-vip-drawer script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalk_ads.js, requires-body=true, timeout=10
+# Hellotalk - VIP 图标 / VIP 体验提示
+^https:\/\/api-cn\.hellotalk8\.com\/payment_gateway_v2\/user\/vip_info script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+^https:\/\/api-cn\.hellotalk8\.com\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+# Hellotalk - 本次抓到的可见 banner 广告
+^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v2\/platform\/banner\?position=non-vip-drawer script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+^https:\/\/api-cn\.hellotalk8\.com\/education\/student\/course\/chat_list_banner script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+# VIP 状态
+^https:\/\/api-cn\.hellotalk8\.com\/payment_gateway_v2\/user\/vip_info script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+# VIP 体验卡提示
+^https:\/\/api-cn\.hellotalk8\.com\/member_privilege_center\/v3\/vip_experience_card\/query_user_feature_right script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+^https:\/\/api-cn\.hellotalk8\.com\/config-center\/v1\/vip_page_banner script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/hellotalkvip_js, requires-body=true, timeout=10
+
+[URL Rewrite]
+# Hellotalk - 本次抓到的穿山甲广告 SDK 统计
+^https:\/\/api-access\.pangolin-sdk-toutiao1\.com\/api\/ad\/union\/sdk\/stats\/batch\/ - reject-200
+# Hellotalk - 本次抓到的广告/归因统计
+^https:\/\/da\.mosspf\.cn\/v1\/open\/da - reject-200
+# VIP 页面内容 / 商品 / banner
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page(?:\?|$) - reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_page_content(?:\?|$) - reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_product(?:\?|$) - reject-dict
+^https:\/\/api-cn\.hellotalk8\.com\/api\/login_config\/business\/vip_banner_v1(?:\?|$) - reject-dict
+
+[MITM]
+hostname = *.hellotalk8.com, *.appsflyersdk.com, *.mosspf.cn, *.fe-resource-app.xiaohongshu.com, *.pangolin-sdk-toutiao1.com, *.dun.163.com,*.beizi.biz, *.doubleclick-cn.net, *.smaato.net, *.somamobi.com, *.hookspf.com, *.volces.com, *.zijieapi.com

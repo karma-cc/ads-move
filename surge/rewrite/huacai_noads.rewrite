@@ -1,0 +1,6 @@
+[Script]
+# 华夏信用卡 - 测试拦截开屏查询接口
+^https:\/\/app\.creditcard\.hxb\.com\.cn\/mgw\.htm script-path=https://raw.githubusercontent.com/karma-cc/ads-move/refs/heads/main/surge/js/huacainoads.js, requires-body=true, timeout=10
+
+[MITM]
+hostname = app.creditcard.hxb.com.cn

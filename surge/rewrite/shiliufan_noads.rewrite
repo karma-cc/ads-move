@@ -1,0 +1,5 @@
+[URL Rewrite]
+^https:\/\/mp\.elong\.com\/tenthousandaura_api\/couponGift\/getUserGiftConfig(?:\?.*)?$ - reject-dict
+
+[MITM]
+hostname = mp.elong.com

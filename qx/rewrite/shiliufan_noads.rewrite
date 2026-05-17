@@ -1,0 +1,5 @@
+[rewrite_local]
+^https:\/\/mp\.elong\.com\/tenthousandaura_api\/couponGift\/getUserGiftConfig(?:\?.*)?$ url reject-dict
+
+[mitm]
+hostname = mp.elong.com
